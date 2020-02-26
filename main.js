@@ -59,8 +59,22 @@ function reduce(array, f, acc) {
 //wordLengths("hello its me") // [5,3,2]
 
 function wordLengths(str) {
-    // TODO: your code here 
+    var arr = str.split(" ") ;
+    var result = [] ;
+    each(arr,function(element){
+        result.push(element.length)
+    });
+    return result
 }
+///
+
+function wordLengths1(str){
+  var arr = str.split(" ")
+  return map(arr,function(element){
+    return element.length
+  });
+}
+
 
 //=============================================================================
 /*                                  Q2                                    */
@@ -72,7 +86,10 @@ function wordLengths(str) {
 // countOccurrences("hello, world!", "l"); // 3
 
 function countOccurrences(string, character) {
-    // your code is here
+    var arr = string.split("") ;
+        return filter(arr,function(element){
+        return character === element
+      }).length
 }
 
 //=============================================================================
@@ -84,7 +101,13 @@ function countOccurrences(string, character) {
 // wordsLongerThanThree("Hello Mad World") //["Hello", "World"]
 
 function wordsLongerThanThree(str) {
-    // TODO: your code here 
+    var arr = str.split(" ") ;
+    return reduce (arr,function(acc,element){
+          if(element.length > 3){
+            return acc=acc+1
+          }
+          else{return acc}
+    },0);
 }
 
 //=============================================================================
@@ -99,7 +122,10 @@ function wordsLongerThanThree(str) {
 //repeatString('dog', 3); // => 'dog' + 'dog' + 'dog' => 'dogdogdog'
 
 function repeatString(str, count) { 
- // TODO: your code here 
+  if(count===0){
+    return "" ;
+  }
+  return str + repeatString(str, count-1) ;
 } 
  
 
@@ -128,7 +154,36 @@ function repeatString(str, count) {
 // pizza.eatSlice();
 // pizza.eatSlice();
 
-// Write your code here .....
+ function makePizza (crust, size, numberOfSlice){
+   var ingredients = [] ;
+   var n_slice = numberOfSlice ;
+   var crust = crust ;
+   var size = size ;
+   return{
+      addIngredients : function(ingredient){
+          return ingredients.push(ingredient) 
+      },
+      displayIngredients : function(){
+        var str = "";
+        for(var i = 0 ; i< ingredients.length ; i++){
+          return "The ingredients are " + str
+        }
+      },
+      bakePizza : function (){
+          var string = "Your "+ n_slice + size + crust + " pizza is done" ;
+          return setTimeout(function(){
+          return string
+          },2000)
+      },
+      eatSlice : function(){
+        if(n_slice!==0){
+          n_slice= n_slice -1;
+          return " still have "+ n_slice + "slice"
+        }else {" you finish your Pizza"}
+         
+      }
+    };
+  }
 
 //=============================================================================
 /*                                  Q6                                      */
@@ -153,8 +208,26 @@ d- Decrement the number of "unread" books
 */
 
 // Now, to make sure that you are actually reading, make a comment below this and type: Yes I am
+function ReadingList(){
+  var book ={};
+  book.read = 0 ;
+  book.unRead = 0 ;
+  book.toRead = [] ;
+  book.currentRead = "" ;
+  book.readBooks = [] ;
 
-// Write your code here .....
+}
+var AddBook = function(book){
+  this.toRead.push(book) ;
+    this.unRead++
+}
+var finishCurrentBook = function(book){
+  this.currentRead = book
+  this.readBooks.push(this.currentRead) ; 
+    this.read++
+    this.toRead.unshift(this.currentRead) ;
+    this.unRead--
+}
 
 //=============================================================================
 /*                                  Q7                                       */
@@ -174,7 +247,29 @@ d- Decrement the number of "unread" books
 //  safe('silver-bar','big') => "Can't fit"
 //  safe('money','small') => "watch gold-bar money"
 
-// Write your code here .....
+function makeSafe (item, itemSize){
+    var size = 0;
+    var str = "" ;
+    
+      if(size > 5 ){
+          return " can't fit "
+      }
+      else if (size===5){
+        return str ;
+      }
+      if(itemSize==="big"){
+        return size = size + 3 ; 
+        str = str + item ;
+      }else if (itemSize==="medium"){
+        return size =size +2 ;
+        str =str + item
+      }else if (itemSize==="smal"){
+        return size = size +1 ;
+        str = str +item
+
+      }
+
+}
 
 //=============================================================================
 /*                                  Q8                                       */
@@ -190,7 +285,7 @@ d- Decrement the number of "unread" books
 //Do not add a list item if the color value is non of the colors
 
 //DO NOT USE JQUERY
-
+// i need
 //================================================================================
 /*                              Q9                                            */
 //================================================================================
@@ -217,13 +312,19 @@ d- Decrement the number of "unread" books
 // Theoretical questions.
 // 1- In your own words,Why do we use Closures ?
 
+//closure generally a reference to a variable declared in different scop but its not global, this reference only lives during the function lives 
+// we use it to reduce usage of global variables
+
+
 // 2- In OOP, what does "this" refer to ?
+//  this in OOp is refered to the current object we use it to invoke the consctructor and to refer to the exact location of of the input
 
 // 3- What is jQuery?
+ // jQuery is a librairy of javascript i condsider it like write less and do more...
 
 // 4- what is the diffrence between Closure's methods and The OOP's methods?
 
-
+// the difference in the declaration  closure inner scope take from the outer
 
 
 
